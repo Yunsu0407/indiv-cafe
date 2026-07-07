@@ -31,6 +31,7 @@
 .top-nav {
   display: flex;
   flex-wrap: wrap;
+  justify-content: flex-end;
   gap: var(--space-2);
 }
 
@@ -48,6 +49,7 @@
 
 .top-nav a {
   background: var(--color-surface-solid);
+  white-space: nowrap;
 }
 
 .top-nav a[aria-current="page"],
@@ -236,6 +238,11 @@ select:focus {
 @media (max-width: 640px) {
   .menu-toolbar,
   .menu-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .top-nav {
+    display: grid;
     grid-template-columns: 1fr;
   }
 }

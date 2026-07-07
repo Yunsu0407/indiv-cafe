@@ -1,38 +1,52 @@
-.orders-header {
-  background: var(--color-primary-dark);
-  color: #ffffff;
-}
-
-.header-inner {
+.site-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: var(--space-4);
-  padding: var(--space-4) 0;
+  gap: var(--space-5);
+  padding: var(--space-6) clamp(1rem, 5vw, 3.5rem);
+  border-bottom: 1px solid var(--color-border);
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(18px);
 }
 
-.brand {
-  font-size: var(--font-size-lg);
+.site-header h1 {
+  margin: 0;
+  font-size: clamp(var(--font-size-2xl), 4vw, 2.75rem);
+  letter-spacing: 0;
+}
+
+.eyebrow {
+  margin: 0 0 var(--space-1);
+  color: var(--color-accent);
+  font-size: var(--font-size-xs);
   font-weight: 800;
+  letter-spacing: 0;
+  text-transform: uppercase;
 }
 
-.orders-header nav {
+.top-nav {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--space-3);
+  justify-content: flex-end;
+  gap: var(--space-2);
 }
 
-.orders-header nav a {
+.top-nav a {
+  display: inline-grid;
+  min-height: 2.75rem;
+  place-items: center;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface-solid);
+  padding: 0.625rem 0.875rem;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.top-nav a[aria-current="page"] {
+  border-color: var(--color-primary);
   color: #ffffff;
-  opacity: 0.72;
-  font-size: var(--font-size-sm);
-  font-weight: 700;
-}
-
-.orders-header nav a.active,
-.orders-header nav a:hover {
-  opacity: 1;
-  color: var(--color-accent-soft);
+  background: var(--color-primary);
 }
 
 .page {
@@ -52,15 +66,6 @@
   margin: 0;
   font-size: clamp(var(--font-size-xl), 4vw, var(--font-size-2xl));
   letter-spacing: 0;
-}
-
-.eyebrow {
-  margin: 0 0 var(--space-1);
-  color: var(--color-accent);
-  font-size: var(--font-size-xs);
-  font-weight: 800;
-  letter-spacing: 0;
-  text-transform: uppercase;
 }
 
 .count-badge,
@@ -214,7 +219,7 @@
 }
 
 @media (max-width: 760px) {
-  .header-inner,
+  .site-header,
   .page-heading,
   .order-card-header,
   .order-card-footer {
@@ -227,6 +232,13 @@
   }
 
   .order-item {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .top-nav {
+    display: grid;
     grid-template-columns: 1fr;
   }
 }
