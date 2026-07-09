@@ -1,0 +1,153 @@
+Project: Cafe Bada / indiv-cafe
+
+Purpose
+- 협업 개발한 카페 주문 서비스를 개인 프로젝트로 확장한다.
+- 고객은 메뉴 탐색, 장바구니, 주문, 주문 내역 확인을 할 수 있다.
+- 관리자는 메뉴와 주문 상태를 관리할 수 있다.
+- 전체 UI는 바다 느낌의 푸른 계열 색상을 공통 테마로 사용한다.
+
+Pages
+
+- Customer
+    - Common Footer
+        - Cafe Bada 브랜드명 표시
+        - "바다의 여유를 닮은 커피와 디저트" 소개 문구
+        - 운영 시간: 매일 09:00 - 21:00, Last order 20:30
+        - 페이지 콘텐츠가 짧아도 화면 하단에 붙도록 표시
+
+    - Home Page
+        - 상단 네비게이션
+            - Cafe Bada 버튼은 홈으로 이동
+            - 홈 버튼은 파도 이미지와 Cafe Bada 텍스트를 세로로 표시
+            - 우측 메뉴: 메뉴, 장바구니, 주문내역, 마이페이지
+            - 스크롤해도 화면 상단에 고정
+        - 바다 이미지 섹션
+            - 내비게이션 아래에 푸른 바다 이미지 표시
+            - Cafe Bada 브랜드 분위기를 강조
+        - 추천 메뉴 섹션
+            - 추천 메뉴 중 최대 4개 표시
+            - 메뉴 이미지, 이름, 영문명, 가격, 설명, 카테고리/추천 태그 표시
+            - 메뉴 카드를 누르면 메뉴 상세 페이지로 이동
+            - "전체 메뉴 보기" 버튼으로 메뉴 목록 페이지 이동
+        - 카테고리 섹션
+            - Coffee, Ade, Tea, Bread, Cake 5개 카테고리를 한 줄에 표시
+            - 카테고리 카드는 대표 이미지와 카테고리명만 표시
+
+    - Menus Page
+        - 카테고리별 메뉴
+            - Coffee, Ade, Tea, Bread, Cake 순서로 메뉴 구분 표시
+            - 각 카테고리별 메뉴 개수 표시
+            - 메뉴 카드 클릭 시 상세 페이지 이동
+        - 검색/필터 영역과 오늘의 메뉴 영역은 표시하지 않음
+
+    - Menu Detail Page
+        - 메뉴 이미지, 카테고리, 이름, 영문명, 설명, 태그, 가격 표시
+        - 추천/품절 상태 표시
+        - 옵션 선택, 수량 선택, 장바구니 담기
+
+    - Basket Page
+        - 장바구니 메뉴 목록 표시
+        - 수량 증가/감소, 항목 삭제
+        - 총 결제 금액 표시
+        - 주문하기 버튼
+
+    - Orders Page
+        - 주문 요약: 전체 주문 수, 진행 중 주문 수, 총 주문 금액
+        - 주문 내역 목록 표시
+
+    - My Page
+        - 비로그인 상태: 로그인 필요 안내, 로그인/회원가입 버튼
+        - 로그인 상태: 회원 등급, 프로필, 로그아웃, 주문 요약, 최근 주문 3건
+
+    - Login Page
+        - 이메일, 비밀번호 입력
+        - 로그인 성공 시 세션 저장
+        - 실패 시 오류 메시지 표시
+
+    - Sign-Up Page
+        - 이름, 이메일, 비밀번호 입력
+        - 중복 이메일 가입 방지
+        - 가입 성공 시 세션 저장
+
+- Admin
+    - Dashboard Page
+        - 운영 요약 카드: 총 메뉴 수, 품절 메뉴 수, 전체 주문 수, 진행 중 주문 수, 총 매출
+        - 최근 주문 목록
+
+    - Menu Management Page
+        - 메뉴 목록 테이블
+        - 카테고리 필터, 메뉴명 검색
+        - 메뉴 상세/수정/삭제
+        - 메뉴 추가 페이지 이동
+
+    - Menu Create/Edit/Detail Page
+        - 메뉴 정보 생성, 수정, 상세 확인
+        - 추천 여부, 품절 여부, 옵션 정보 관리
+
+    - Order Management Page
+        - 주문 요약 카드
+        - 주문 상태 필터
+        - 주문번호 또는 메뉴명 검색
+        - 주문 상태 변경
+
+Data / Storage
+- CafeData
+    - categories: 기본 카테고리 데이터
+    - menus: 기본 메뉴 데이터
+    - orders: 초기 주문 데이터
+- localStorage
+    - indivCafeMenusV3: 메뉴 데이터
+    - newCafeCart: 장바구니 데이터
+    - newCafeOrders: 주문 데이터
+    - newCafeUsers: 회원 데이터
+    - newCafeSession: 로그인 세션
+
+Order Status
+- pending: 접수 대기
+- preparing: 제조 중
+- ready: 픽업 가능
+- completed: 완료
+- cancelled: 취소
+
+Menu Categories
+- Beverage
+    - Coffee(8)
+        - Americano
+        - Cafe Latte
+        - Vanilla Latte
+        - Caramel Macchiato
+        - Cold Brew
+        - Einspanner
+        - Cafe Mocha
+        - Flat White
+    - Ade(4)
+        - Lemon Ade
+        - Grapefruit Ade
+        - Green Grape Ade
+        - Peach Ade
+    - Tea(4)
+        - Earl Grey
+        - Chamomile
+        - Hibiscus Tea
+        - Jeju Green Tea
+- Food
+    - Bread(4)
+        - Croissant
+        - Garlic Baguette
+        - Salt Bread
+        - Cinnamon Roll
+    - Cake(4)
+        - Basque Cheesecake
+        - Tiramisu
+        - Chocolate Cake
+        - Earl Grey Cake
+
+Menu Count
+- Total: 24
+- Beverage: 16
+- Food: 8
+
+Recommended Menu Rules
+- Home Page: 추천 메뉴 최대 4개 표시
+- Menus Page: 오늘의 메뉴 섹션 없이 카테고리별 메뉴만 표시
+- Admin: 각 메뉴의 isRecommended 값으로 추천 여부 관리

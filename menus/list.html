@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>메뉴 | New Cafe</title>
+    <title>메뉴 | Cafe Bada</title>
     <link rel="stylesheet" href="../css/variables.css" />
     <link rel="stylesheet" href="./list.css" />
     <script src="../js/data.js" defer></script>
@@ -12,41 +12,32 @@
   </head>
   <body>
     <header class="site-header">
-      <div>
-        <a class="brand-link" href="../index.html">New Cafe</a>
-        <h1><a href="../index.html">메뉴</a></h1>
+      <div class="site-header-inner container">
+        <a class="brand-link" href="../index.html">Cafe Bada</a>
+        <nav class="top-nav" aria-label="고객 메뉴">
+          <a aria-current="page" href="./list.html">메뉴</a>
+          <a href="../basket/list.html">장바구니</a>
+          <a href="../orders/list.html">주문내역</a>
+          <a href="../my/index.html">마이페이지</a>
+        </nav>
       </div>
-      <nav class="top-nav" aria-label="고객 메뉴">
-        <a href="../index.html">홈</a>
-        <a aria-current="page" href="./list.html">메뉴</a>
-        <a href="../basket/list.html">장바구니</a>
-        <a href="../orders/list.html">주문내역</a>
-        <a href="../my/index.html">마이페이지</a>
-      </nav>
     </header>
 
     <main class="container menu-page">
-      <section class="menu-toolbar glass-card" aria-label="메뉴 검색 및 필터">
-        <label>
-          <span>검색</span>
-          <input id="searchInput" type="search" placeholder="메뉴명, 설명 검색" />
-        </label>
-        <label>
-          <span>카테고리</span>
-          <select id="categoryFilter"></select>
-        </label>
-      </section>
-
-      <section class="menu-section">
-        <div class="section-heading">
-          <div>
-            <p class="eyebrow">Cafe Menu</p>
-            <h2>오늘의 메뉴</h2>
-          </div>
-          <span id="menuCount" class="count-badge">0개</span>
-        </div>
-        <div id="menuGrid" class="menu-grid" aria-live="polite"></div>
-      </section>
+      <nav id="categoryJump" class="category-jump" aria-label="Menu categories"></nav>
+      <div id="categorySections" class="category-sections" aria-live="polite"></div>
     </main>
+
+    <button id="scrollTopButton" class="scroll-top-button" type="button" aria-label="Scroll to top"></button>
+
+    <footer class="site-footer">
+      <div class="site-footer__inner container">
+        <div>
+          <p class="site-footer__brand">Cafe Bada</p>
+          <p class="site-footer__copy">바다의 여유를 닮은 커피와 디저트를 준비합니다.</p>
+          <p class="site-footer__meta">매일 09:00 - 21:00 · Last order 20:30</p>
+        </div>
+      </div>
+    </footer>
   </body>
 </html>

@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>New Cafe</title>
+    <title>Cafe Bada</title>
     <link rel="stylesheet" href="./css/variables.css" />
     <link rel="stylesheet" href="./index.css" />
     <script src="./js/data.js" defer></script>
@@ -12,27 +12,23 @@
   </head>
   <body>
     <header class="site-header">
-      <div>
-        <a class="brand-link" href="./index.html">New Cafe</a>
-        <h1><a href="./index.html">오늘도, 커피 한 잔의 여유</a></h1>
+      <div class="site-header-inner container">
+        <a class="brand-link" href="./index.html">Cafe Bada</a>
+        <nav class="top-nav" aria-label="고객 메뉴">
+          <a href="./menus/list.html">메뉴</a>
+          <a href="./basket/list.html">장바구니</a>
+          <a href="./orders/list.html">주문내역</a>
+          <a href="./my/index.html">마이페이지</a>
+        </nav>
       </div>
-      <nav class="top-nav" aria-label="고객 메뉴">
-        <a aria-current="page" href="./index.html">홈</a>
-        <a href="./menus/list.html">메뉴</a>
-        <a href="./basket/list.html">장바구니</a>
-        <a href="./orders/list.html">주문내역</a>
-        <a href="./my/index.html">마이페이지</a>
-      </nav>
     </header>
 
     <main class="container home-page">
-      <section class="hero glass-card">
-        <div>
-          <p class="eyebrow">Cafe Menu</p>
-          <h2>매일 아침, 신선한 원두로 내린 커피</h2>
-          <p class="hero-copy">엄선된 원두와 신선한 재료로 만든 메뉴를 만나보세요.</p>
-        </div>
-        <a class="primary-button" href="./menus/list.html">메뉴 보러가기</a>
+      <section class="bada-visual" aria-label="Cafe Bada 바다 이미지">
+        <img
+          src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1600&q=80"
+          alt="푸른 바다와 파도"
+        />
       </section>
 
       <section class="menu-section">
@@ -56,5 +52,15 @@
         <div id="categoryList" class="category-list"></div>
       </section>
     </main>
+
+    <footer class="site-footer">
+      <div class="site-footer__inner container">
+        <div>
+          <p class="site-footer__brand">Cafe Bada</p>
+          <p class="site-footer__copy">바다의 여유를 닮은 커피와 디저트를 준비합니다.</p>
+          <p class="site-footer__meta">매일 09:00 - 21:00 · Last order 20:30</p>
+        </div>
+      </div>
+    </footer>
   </body>
 </html>

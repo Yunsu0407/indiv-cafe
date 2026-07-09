@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>메뉴 상세 | New Cafe</title>
+    <title>메뉴 상세 | Cafe Bada</title>
     <link rel="stylesheet" href="../css/variables.css" />
     <link rel="stylesheet" href="./detail.css" />
     <script src="../js/data.js" defer></script>
@@ -12,18 +12,26 @@
   </head>
   <body>
     <header class="site-header">
-      <div>
-        <a class="brand-link" href="../index.html">New Cafe</a>
-        <h1><a href="../index.html">메뉴 상세</a></h1>
+      <div class="site-header-inner container">
+        <a class="brand-link" href="../index.html">Cafe Bada</a>
+        <nav class="top-nav" aria-label="고객 메뉴">
+          <a href="./list.html">메뉴</a>
+        </nav>
       </div>
-      <nav class="top-nav" aria-label="고객 메뉴">
-        <a href="../index.html">홈</a>
-        <a href="./list.html">메뉴</a>
-      </nav>
     </header>
 
     <main class="container detail-page">
       <article id="detailPanel" class="detail-panel glass-card" aria-live="polite"></article>
     </main>
+
+    <footer class="site-footer">
+      <div class="site-footer__inner container">
+        <div>
+          <p class="site-footer__brand">Cafe Bada</p>
+          <p class="site-footer__copy">바다의 여유를 닮은 커피와 디저트를 준비합니다.</p>
+          <p class="site-footer__meta">매일 09:00 - 21:00 · Last order 20:30</p>
+        </div>
+      </div>
+    </footer>
   </body>
 </html>

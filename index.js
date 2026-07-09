@@ -3,6 +3,14 @@ window.addEventListener("DOMContentLoaded", () => {
   const recommendedGrid = document.querySelector("#recommendedGrid");
   const categoryList = document.querySelector("#categoryList");
 
+  const categoryImages = {
+    coffee: "https://images.unsplash.com/photo-1497935586351-b67a49e012bf?auto=format&fit=crop&w=600&q=80",
+    ade: "https://images.unsplash.com/photo-1621263764928-df1444c5e859?auto=format&fit=crop&w=600&q=80",
+    tea: "https://images.unsplash.com/photo-1597318181409-cf64d0b5d8a2?auto=format&fit=crop&w=600&q=80",
+    bread: "https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=600&q=80",
+    cake: "https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=600&q=80",
+  };
+
   function escapeHtml(value) {
     return String(value ?? "")
       .replaceAll("&", "&amp;")
@@ -13,7 +21,7 @@ window.addEventListener("DOMContentLoaded", () => {
   }
 
   function renderRecommended() {
-    const recommended = CafeData.menus.filter((menu) => menu.isRecommended);
+    const recommended = CafeData.menus.filter((menu) => menu.isRecommended).slice(0, 4);
 
     if (recommended.length === 0) {
       recommendedGrid.innerHTML = '<p class="empty-state">추천 메뉴가 없습니다.</p>';
@@ -56,9 +64,11 @@ window.addEventListener("DOMContentLoaded", () => {
     categoryList.innerHTML = CafeData.categories
       .map(
         (category) => `
-          <a class="category-card glass-card" href="./menus/list.html">
+          <a class="category-card glass-card" href="./menus/list.html?category=${encodeURIComponent(category.id)}">
+            <div class="category-image">
+              <img src="${escapeHtml(categoryImages[category.id])}" alt="${escapeHtml(category.label || category.name)}" />
+            </div>
             <span class="category-label">${escapeHtml(category.label || category.name)}</span>
-            <p class="category-description">${escapeHtml(category.description || "")}</p>
           </a>
         `
       )
