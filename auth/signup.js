@@ -1,7 +1,19 @@
-const { registerUser } = window.CafeUtils;
+const { getQueryParam, registerUser } = window.CafeUtils;
 
 const form = document.getElementById("signup-form");
 const errorMessage = document.getElementById("error-message");
+const loginLink = document.getElementById("login-link");
+const redirectPath = getQueryParam("redirect") || "../my/index.html";
+
+function isSafeRedirect(value) {
+  return value && !value.startsWith("http://") && !value.startsWith("https://") && !value.startsWith("//");
+}
+
+function getRedirectPath() {
+  return isSafeRedirect(redirectPath) ? redirectPath : "../my/index.html";
+}
+
+loginLink.href = `./login.html?redirect=${encodeURIComponent(getRedirectPath())}`;
 
 form.addEventListener("submit", (event) => {
   event.preventDefault();
@@ -17,5 +29,5 @@ form.addEventListener("submit", (event) => {
     return;
   }
 
-  window.location.href = "../my/index.html";
+  window.location.href = getRedirectPath();
 });

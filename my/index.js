@@ -1,4 +1,5 @@
-const { getOrders, formatPrice, getCurrentUser, logout } = window.CafeUtils;
+const { getOrders, formatPrice, getCurrentUser, logout, findMenuById, findCategoryById } =
+  window.CafeUtils;
 
 const statusLabels = {
   pending: "접수 대기",
@@ -9,19 +10,10 @@ const statusLabels = {
 };
 
 const tiers = [
-  { min: 10, label: "골드회원" },
-  { min: 3, label: "실버회원" },
-  { min: 0, label: "일반회원" },
+  { min: 10, label: "골드 회원" },
+  { min: 3, label: "실버 회원" },
+  { min: 0, label: "일반 회원" },
 ];
-
-function escapeHtml(value) {
-  return String(value ?? "")
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;")
-    .replaceAll('"', "&quot;")
-    .replaceAll("'", "&#039;");
-}
 
 function formatDate(value) {
   const date = value ? new Date(value) : null;
@@ -43,52 +35,79 @@ function getTierLabel(orderCount) {
   return tiers.find((tier) => orderCount >= tier.min).label;
 }
 
+function getOrderTotal(orders) {
+  return orders.reduce((total, order) => total + (Number(order.totalPrice) || 0), 0);
+}
+
+function getFavoriteCategoryLabel(orders) {
+  const categoryCounts = new Map();
+
+  orders.forEach((order) => {
+    (order.items || []).forEach((item) => {
+      const menu = findMenuById(item.menuId);
+
+      if (!menu) {
+        return;
+      }
+
+      const count = categoryCounts.get(menu.categoryId) || 0;
+      categoryCounts.set(menu.categoryId, count + (Number(item.quantity) || 1));
+    });
+  });
+
+  const favorite = [...categoryCounts.entries()].sort((a, b) => b[1] - a[1])[0];
+
+  if (!favorite) {
+    return "아직 없음";
+  }
+
+  const category = findCategoryById(favorite[0]);
+  return category?.label || category?.name || "기타";
+}
+
 function renderProfile(user, orders) {
   const tierLabel = getTierLabel(orders.length);
+  const totalPrice = getOrderTotal(orders);
 
   document.getElementById("tier-badge").textContent = tierLabel;
   document.getElementById("profile-avatar").textContent = user.name.trim().charAt(0).toUpperCase();
   document.getElementById("profile-name").textContent = user.name;
   document.getElementById("profile-desc").textContent =
-    orders.length > 0 ? `지금까지 ${orders.length}건을 주문했어요.` : "아직 주문 내역이 없어요.";
+    orders.length > 0
+      ? `${formatPrice(totalPrice)} 만큼 Cafe Bada를 즐겼어요.`
+      : "바다처럼 여유로운 첫 주문을 기다리고 있어요.";
 }
 
 function renderSummary(orders) {
-  const activeStatuses = new Set(["pending", "preparing", "ready"]);
-  const activeCount = orders.filter((order) => activeStatuses.has(order.status)).length;
-  const totalPrice = orders.reduce((total, order) => total + (Number(order.totalPrice) || 0), 0);
+  const totalPrice = getOrderTotal(orders);
+  const points = Math.floor(totalPrice * 0.03);
 
   document.getElementById("total-orders").textContent = `${orders.length}건`;
-  document.getElementById("active-orders").textContent = `${activeCount}건`;
-  document.getElementById("total-price").textContent = formatPrice(totalPrice);
+  document.getElementById("member-points").textContent = `${points.toLocaleString("ko-KR")}P`;
+  document.getElementById("favorite-category").textContent = getFavoriteCategoryLabel(orders);
 }
 
-function renderRecentOrders(orders) {
-  const recentOrders = document.getElementById("recent-orders");
-  const emptyState = document.getElementById("recent-empty");
-  const recent = orders.slice(0, 3);
+function renderRecentOrderSummary(orders) {
+  const summary = document.getElementById("recent-order-summary");
+  const meta = document.getElementById("recent-order-meta");
+  const latest = orders[0];
 
-  if (recent.length === 0) {
-    recentOrders.innerHTML = "";
-    emptyState.hidden = false;
+  if (!latest) {
+    summary.textContent = "아직 주문 내역이 없습니다.";
+    meta.textContent = "메뉴를 담고 첫 주문을 시작해보세요.";
     return;
   }
 
-  emptyState.hidden = true;
-  recentOrders.innerHTML = recent
-    .map(
-      (order) => `
-        <a class="order-mini-card glass-card" href="../orders/detail.html?id=${encodeURIComponent(order.id)}">
-          <div>
-            <p class="order-id">${escapeHtml(order.id)}</p>
-            <p class="order-date">${formatDate(order.createdAt)}</p>
-          </div>
-          <span class="status-badge ${escapeHtml(order.status)}">${statusLabels[order.status] || order.status || "상태 없음"}</span>
-          <strong class="order-total">${formatPrice(order.totalPrice)}</strong>
-        </a>
-      `
-    )
-    .join("");
+  const firstItem = latest.items?.[0];
+  const extraCount = Math.max((latest.items?.length || 0) - 1, 0);
+  const itemLabel = firstItem
+    ? `${firstItem.name}${extraCount > 0 ? ` 외 ${extraCount}개` : ""}`
+    : "주문 메뉴";
+
+  summary.textContent = `${itemLabel} · ${formatPrice(latest.totalPrice)}`;
+  meta.textContent = `${formatDate(latest.createdAt)} · ${
+    statusLabels[latest.status] || latest.status || "상태 없음"
+  }`;
 }
 
 function init() {
@@ -97,8 +116,7 @@ function init() {
   const memberView = document.getElementById("member-view");
 
   if (!user) {
-    guestView.hidden = false;
-    memberView.hidden = true;
+    window.location.href = "../auth/login.html?redirect=../my/index.html";
     return;
   }
 
@@ -108,7 +126,7 @@ function init() {
   const orders = getOrders();
   renderProfile(user, orders);
   renderSummary(orders);
-  renderRecentOrders(orders);
+  renderRecentOrderSummary(orders);
 
   document.getElementById("btn-logout").addEventListener("click", () => {
     logout();

@@ -83,7 +83,28 @@
 }
 
 .page {
+  position: relative;
+  isolation: isolate;
   padding-block: var(--space-6);
+}
+
+.page::before {
+  content: "";
+  position: absolute;
+  inset: 0 calc(50% - 50vw);
+  z-index: -2;
+  background:
+    linear-gradient(rgba(241, 248, 251, 0.72), rgba(241, 248, 251, 0.88)),
+    url("../assets/KakaoTalk_20260709_182904458_02.jpg") center / cover no-repeat;
+}
+
+.page::after {
+  content: "";
+  position: absolute;
+  inset: 0 calc(50% - 50vw);
+  z-index: -1;
+  background: rgba(255, 255, 255, 0.16);
+  backdrop-filter: saturate(108%);
 }
 
 .cart-list {
@@ -214,6 +235,12 @@
   color: var(--color-accent);
   font-weight: 700;
   padding: var(--space-5) 0;
+}
+
+.cart-summary[hidden],
+.empty-state[hidden],
+.order-success[hidden] {
+  display: none;
 }
 
 @media (max-width: 760px) {

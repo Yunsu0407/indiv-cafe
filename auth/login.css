@@ -68,16 +68,58 @@
 }
 
 .auth-page {
+  position: relative;
+  isolation: isolate;
   display: grid;
   place-items: center;
   padding-block: var(--space-7);
 }
 
+.auth-page::before {
+  content: "";
+  position: absolute;
+  inset: 0 calc(50% - 50vw);
+  z-index: -2;
+  background:
+    linear-gradient(rgba(241, 248, 251, 0.7), rgba(241, 248, 251, 0.88)),
+    url("../assets/KakaoTalk_20260709_182904458_02.jpg") center / cover no-repeat;
+}
+
+.auth-page::after {
+  content: "";
+  position: absolute;
+  inset: 0 calc(50% - 50vw);
+  z-index: -1;
+  background: rgba(255, 255, 255, 0.16);
+  backdrop-filter: saturate(108%);
+}
+
 .auth-card {
   display: grid;
   gap: var(--space-4);
-  width: min(100%, 26rem);
-  padding: var(--space-6);
+  width: min(100%, 44rem);
+  justify-items: stretch;
+  padding: var(--space-7);
+}
+
+.auth-heading {
+  display: grid;
+  justify-items: center;
+  gap: var(--space-3);
+  text-align: center;
+}
+
+.auth-heading h1,
+.auth-heading p {
+  margin: 0;
+}
+
+.auth-heading h1 {
+  font-size: var(--font-size-xl);
+}
+
+.auth-heading p {
+  color: var(--color-text-muted);
 }
 
 .form-field {
@@ -119,6 +161,12 @@
   color: #ffffff;
 }
 
+.btn-ghost {
+  border-color: var(--color-border);
+  color: var(--color-primary-dark);
+  background: var(--color-surface-solid);
+}
+
 .error-message {
   margin: 0;
   border-radius: var(--radius-sm);
@@ -129,16 +177,11 @@
   font-weight: 800;
 }
 
-.auth-switch {
-  margin: 0;
-  color: var(--color-text-muted);
-  font-size: var(--font-size-sm);
-  text-align: center;
-}
-
-.auth-switch a {
-  color: var(--color-primary);
-  font-weight: 800;
+.auth-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-3);
 }
 
 @media (max-width: 640px) {

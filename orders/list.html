@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>주문 내역 | Cafe Bada</title>
+    <title>주문내역 | Cafe Bada</title>
     <link rel="stylesheet" href="../css/variables.css" />
     <link rel="stylesheet" href="./list.css" />
   </head>
@@ -21,32 +21,39 @@
     </header>
 
     <main class="container page">
-      <section class="page-heading">
-        <span id="order-count" class="count-badge">0건</span>
+      <section id="guest-view" class="guest-card glass-card" hidden>
+        <h2>로그인이 필요합니다</h2>
+        <p>주문 내역은 로그인 후 확인할 수 있어요.</p>
+        <div class="guest-actions">
+          <a class="btn btn-primary" href="../auth/login.html">로그인</a>
+          <a class="btn btn-ghost" href="../auth/signup.html">회원가입</a>
+        </div>
       </section>
 
-      <section class="summary-grid" aria-label="주문 요약">
-        <article class="summary-card glass-card">
-          <span>전체 주문</span>
-          <strong id="total-orders">0건</strong>
-        </article>
-        <article class="summary-card glass-card">
-          <span>진행 중</span>
-          <strong id="active-orders">0건</strong>
-        </article>
-        <article class="summary-card glass-card">
-          <span>누적 금액</span>
-          <strong id="total-price">₩0</strong>
-        </article>
-      </section>
+      <div id="member-view" hidden>
+        <section class="summary-grid" aria-label="주문 요약">
+          <article class="summary-card glass-card">
+            <span>전체 주문</span>
+            <strong id="total-orders">0건</strong>
+          </article>
+          <article class="summary-card glass-card">
+            <span>진행 중</span>
+            <strong id="active-orders">0건</strong>
+          </article>
+          <article class="summary-card glass-card">
+            <span>누적 금액</span>
+            <strong id="total-price">₩0</strong>
+          </article>
+        </section>
 
-      <div id="order-list" class="order-list" aria-live="polite"></div>
+        <div id="order-list" class="order-list" aria-live="polite"></div>
 
-      <section id="empty-state" class="empty-state glass-card" hidden>
-        <h2>아직 주문 내역이 없습니다.</h2>
-        <p>장바구니에서 주문을 완료하면 이곳에서 내역을 확인할 수 있습니다.</p>
-        <a class="btn btn-primary" href="../menus/list.html">메뉴 보러가기</a>
-      </section>
+        <section id="empty-state" class="empty-state glass-card" hidden>
+          <h2>아직 주문 내역이 없습니다.</h2>
+          <p>장바구니에서 주문을 완료하면 이곳에서 내역을 확인할 수 있습니다.</p>
+          <a class="btn btn-primary" href="../menus/list.html">메뉴 보러가기</a>
+        </section>
+      </div>
     </main>
 
     <footer class="site-footer">

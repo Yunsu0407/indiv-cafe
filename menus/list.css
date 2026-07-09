@@ -102,9 +102,30 @@
 }
 
 .menu-page {
+  position: relative;
+  isolation: isolate;
   display: grid;
   gap: var(--space-6);
   padding: var(--space-6) 0 var(--space-7);
+}
+
+.menu-page::before {
+  content: "";
+  position: absolute;
+  inset: 0 calc(50% - 50vw);
+  z-index: -2;
+  background:
+    linear-gradient(rgba(241, 248, 251, 0.74), rgba(241, 248, 251, 0.9)),
+    url("../assets/KakaoTalk_20260709_182904458_02.jpg") center / cover no-repeat;
+}
+
+.menu-page::after {
+  content: "";
+  position: absolute;
+  inset: 0 calc(50% - 50vw);
+  z-index: -1;
+  background: rgba(255, 255, 255, 0.16);
+  backdrop-filter: saturate(108%);
 }
 
 .category-jump {

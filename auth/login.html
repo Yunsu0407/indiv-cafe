@@ -16,6 +16,11 @@
 
     <main class="container auth-page">
       <form id="login-form" class="auth-card glass-card" novalidate>
+        <div class="auth-heading">
+          <h1>로그인이 필요합니다</h1>
+          <p id="login-message">Cafe Bada의 주문 내역과 마이페이지는 로그인 후 이용할 수 있어요.</p>
+        </div>
+
         <p id="error-message" class="error-message" hidden></p>
 
         <label class="form-field">
@@ -28,9 +33,10 @@
           <input id="password" type="password" autocomplete="current-password" required />
         </label>
 
-        <button class="btn btn-primary" type="submit">로그인</button>
-
-        <p class="auth-switch">계정이 없으신가요? <a href="./signup.html">회원가입</a></p>
+        <div class="auth-actions">
+          <button class="btn btn-primary" type="submit">로그인</button>
+          <a id="signup-link" class="btn btn-ghost" href="./signup.html">회원가입</a>
+        </div>
       </form>
     </main>
 

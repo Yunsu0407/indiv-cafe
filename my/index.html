@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>마이페이지 | Cafe Bada</title>
     <link rel="stylesheet" href="../css/variables.css" />
-    <link rel="stylesheet" href="./index.css" />
+    <link rel="stylesheet" href="/my/index.css" />
   </head>
   <body>
     <header class="site-header">
@@ -32,40 +32,53 @@
 
       <div id="member-view" hidden>
         <section class="page-heading">
-          <span id="tier-badge" class="count-badge">일반회원</span>
+          <span id="tier-badge" class="count-badge">일반 회원</span>
         </section>
 
         <section class="profile-card glass-card" aria-label="회원 정보">
           <span id="profile-avatar" class="profile-avatar">C</span>
           <div class="profile-info">
-            <p id="profile-name" class="profile-name">커피러버</p>
-            <p id="profile-desc" class="profile-desc">아직 주문 내역이 없어요.</p>
+            <p id="profile-name" class="profile-name">Cafe Bada 멤버</p>
+            <p id="profile-desc" class="profile-desc">바다처럼 여유로운 하루를 준비해드릴게요.</p>
           </div>
           <button id="btn-logout" class="btn btn-ghost" type="button">로그아웃</button>
         </section>
 
-        <section class="summary-grid" aria-label="주문 요약">
+        <section class="summary-grid" aria-label="회원 요약">
           <article class="summary-card glass-card">
-            <span>전체 주문</span>
+            <span>누적 주문</span>
             <strong id="total-orders">0건</strong>
           </article>
           <article class="summary-card glass-card">
-            <span>진행 중</span>
-            <strong id="active-orders">0건</strong>
+            <span>적립 예상 포인트</span>
+            <strong id="member-points">0P</strong>
           </article>
           <article class="summary-card glass-card">
-            <span>누적 결제금액</span>
-            <strong id="total-price">₩0</strong>
+            <span>선호 카테고리</span>
+            <strong id="favorite-category">아직 없음</strong>
           </article>
         </section>
 
-        <section class="section-block">
-          <div class="section-heading">
-            <h2>최근 주문</h2>
-            <a class="ghost-link" href="../orders/list.html">전체 보기</a>
-          </div>
-          <div id="recent-orders" class="recent-orders" aria-live="polite"></div>
-          <p id="recent-empty" class="empty-state" hidden>아직 주문 내역이 없습니다.</p>
+        <section class="dashboard-grid">
+          <article class="dashboard-card glass-card">
+            <div class="section-heading">
+              <h2>최근 주문 요약</h2>
+              <a class="ghost-link" href="../orders/list.html">주문 내역 보기</a>
+            </div>
+            <p id="recent-order-summary" class="dashboard-main">아직 주문 내역이 없습니다.</p>
+            <p id="recent-order-meta" class="dashboard-sub">메뉴를 담고 첫 주문을 시작해보세요.</p>
+          </article>
+
+          <article class="dashboard-card glass-card">
+            <div class="section-heading">
+              <h2>회원 혜택</h2>
+            </div>
+            <ul class="benefit-list">
+              <li>누적 주문 3건부터 실버 회원</li>
+              <li>누적 주문 10건부터 골드 회원</li>
+              <li>결제 금액의 3%를 포인트로 표시</li>
+            </ul>
+          </article>
         </section>
       </div>
     </main>
@@ -82,6 +95,6 @@
 
     <script src="../js/data.js"></script>
     <script src="../js/utils.js"></script>
-    <script src="./index.js"></script>
+    <script src="/my/index.js"></script>
   </body>
 </html>

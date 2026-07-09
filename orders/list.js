@@ -1,4 +1,4 @@
-const { getOrders, formatPrice } = window.CafeUtils;
+const { getOrders, formatPrice, getCurrentUser } = window.CafeUtils;
 
 const statusLabels = {
   pending: "접수 대기",
@@ -43,7 +43,6 @@ function renderSummary(orders) {
   const activeCount = orders.filter((order) => activeStatuses.has(order.status)).length;
   const totalPrice = orders.reduce((total, order) => total + (Number(order.totalPrice) || 0), 0);
 
-  document.getElementById("order-count").textContent = `${orders.length}건`;
   document.getElementById("total-orders").textContent = `${orders.length}건`;
   document.getElementById("active-orders").textContent = `${activeCount}건`;
   document.getElementById("total-price").textContent = formatPrice(totalPrice);
@@ -72,7 +71,9 @@ function renderOrders() {
               <p class="order-id">${escapeHtml(order.id)}</p>
               <p class="order-date">${formatDate(order.createdAt)}</p>
             </div>
-            <span class="status-badge ${escapeHtml(order.status)}">${statusLabels[order.status] || order.status || "상태 없음"}</span>
+            <span class="status-badge ${escapeHtml(order.status)}">${
+              statusLabels[order.status] || order.status || "상태 없음"
+            }</span>
           </div>
 
           <ul class="order-items">
@@ -84,9 +85,11 @@ function renderOrders() {
                       <span class="item-name">${escapeHtml(item.name)}</span>
                       <p class="item-options">${escapeHtml(formatOptions(item.options))}</p>
                     </div>
-                    <span class="item-pill">${item.quantity}개 · ${formatPrice(item.price * item.quantity)}</span>
+                    <span class="item-pill">${item.quantity}개 · ${formatPrice(
+                      item.price * item.quantity,
+                    )}</span>
                   </li>
-                `
+                `,
               )
               .join("")}
           </ul>
@@ -96,9 +99,24 @@ function renderOrders() {
             <strong class="order-total">${formatPrice(order.totalPrice)}</strong>
           </div>
         </article>
-      `
+      `,
     )
     .join("");
 }
 
-renderOrders();
+function init() {
+  const user = getCurrentUser();
+  const guestView = document.getElementById("guest-view");
+  const memberView = document.getElementById("member-view");
+
+  if (!user) {
+    window.location.href = "../auth/login.html?redirect=../orders/list.html";
+    return;
+  }
+
+  guestView.hidden = true;
+  memberView.hidden = false;
+  renderOrders();
+}
+
+init();

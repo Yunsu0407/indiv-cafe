@@ -47,7 +47,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
     return `
       <article class="menu-card ${menu.isSoldOut ? "is-sold-out" : ""}">
-        <a href="./detail.html?id=${encodeURIComponent(menu.id)}">
+        <a href="./detail?id=${encodeURIComponent(menu.id)}">
           <div class="menu-image">
             <img src="${escapeHtml(menu.image)}" alt="${escapeHtml(menu.name)}" />
           </div>

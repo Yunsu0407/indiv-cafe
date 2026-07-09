@@ -118,14 +118,15 @@ a {
 .site-footer {
   flex-shrink: 0;
   margin-top: auto;
-  border-top: 1px solid rgba(255, 255, 255, 0.32);
-  background: #aeb9bf;
+  border-top: 1px solid rgba(255, 255, 255, 0.24);
+  background: #5f747d;
+  box-shadow: 0 -0.5rem 1.5rem rgba(7, 59, 82, 0.12);
 }
 
 .site-footer__inner {
   display: grid;
   gap: var(--space-5);
-  padding: var(--space-6) 0;
+  padding: var(--space-6) 0 var(--space-7);
 }
 
 .site-footer__brand {
@@ -139,8 +140,10 @@ a {
 .site-footer__copy,
 .site-footer__meta {
   margin: 0;
-  color: #ffffff;
+  color: rgba(255, 255, 255, 0.92);
   font-size: var(--font-size-sm);
+  font-weight: 700;
+  text-shadow: 0 1px 2px rgba(7, 59, 82, 0.22);
 }
 
 @media (max-width: 700px) {
