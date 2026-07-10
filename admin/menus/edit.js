@@ -2,6 +2,22 @@
   const formEl = document.getElementById("menu-form");
   const categorySelectEl = document.getElementById("category-select");
   const notFoundEl = document.getElementById("not-found-message");
+  const singleSizeLabel = formEl.querySelector('[data-size-option="single"]');
+  const singleSizeInput = formEl.querySelector('input[name="sizes"][value="single"]');
+
+  function isBeverageCategory(categoryId) {
+    const category = window.CafeUtils.findCategoryById(categoryId);
+    return category?.group === "Beverage";
+  }
+
+  function syncSizeOptions() {
+    const hideSingle = isBeverageCategory(formEl.elements.categoryId.value);
+    singleSizeLabel.hidden = hideSingle;
+
+    if (hideSingle) {
+      singleSizeInput.checked = false;
+    }
+  }
 
   function renderCategoryOptions() {
     const categories = window.CafeData?.categories || [];
@@ -31,6 +47,7 @@
     setCheckedValues("sizes", menu.options?.sizes);
     formEl.elements.isRecommended.checked = Boolean(menu.isRecommended);
     formEl.elements.isSoldOut.checked = Boolean(menu.isSoldOut);
+    syncSizeOptions();
   }
 
   function getCheckedValues(formData, name) {
@@ -64,8 +81,12 @@
         isSoldOut: formData.get("isSoldOut") === "on",
       };
 
+      if (isBeverageCategory(updates.categoryId)) {
+        updates.options.sizes = updates.options.sizes.filter((size) => size !== "single");
+      }
+
       window.CafeUtils.updateMenu(menuId, updates);
-      window.location.href = `detail.html?id=${menuId}`;
+      window.location.href = `/admin/menus/detail?id=${encodeURIComponent(menuId)}`;
     };
   }
 
@@ -77,6 +98,7 @@
     fillForm(menu);
     formEl.hidden = false;
     formEl.addEventListener("submit", handleSubmit(menu.id));
+    categorySelectEl.addEventListener("change", syncSizeOptions);
   } else {
     notFoundEl.hidden = false;
   }

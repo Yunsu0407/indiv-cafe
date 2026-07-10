@@ -37,17 +37,46 @@
   function getMenus() {
     const storedMenus = readStorage(MENU_STORAGE_KEY, null);
     if (storedMenus) {
-      return storedMenus;
+      return normalizeAndSaveMenus(storedMenus);
     }
 
     const initialMenus = window.CafeData?.menus || [];
-    writeStorage(MENU_STORAGE_KEY, initialMenus);
-    return initialMenus;
+    return saveMenus(initialMenus);
   }
 
   function saveMenus(menus) {
-    writeStorage(MENU_STORAGE_KEY, menus);
-    return menus;
+    const normalizedMenus = normalizeMenus(menus);
+    writeStorage(MENU_STORAGE_KEY, normalizedMenus);
+    return normalizedMenus;
+  }
+
+  function normalizeAndSaveMenus(menus) {
+    const normalizedMenus = normalizeMenus(menus);
+    if (JSON.stringify(normalizedMenus) !== JSON.stringify(menus)) {
+      writeStorage(MENU_STORAGE_KEY, normalizedMenus);
+    }
+
+    return normalizedMenus;
+  }
+
+  function normalizeMenus(menus) {
+    return menus.map(normalizeMenu);
+  }
+
+  function normalizeMenu(menu) {
+    const category = findCategoryById(menu.categoryId);
+
+    if (category?.group !== "Beverage") {
+      return menu;
+    }
+
+    return {
+      ...menu,
+      options: {
+        ...menu.options,
+        sizes: (menu.options?.sizes || []).filter((size) => size !== "single"),
+      },
+    };
   }
 
   function generateMenuId(seedName) {

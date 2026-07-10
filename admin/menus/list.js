@@ -40,8 +40,8 @@
         ${menu.isRecommended ? '<span class="badge badge--warning">추천</span>' : ""}
       </span>
       <span class="menu-table__actions">
-        <a href="detail.html?id=${menu.id}" class="btn btn--ghost btn--sm">상세</a>
-        <a href="edit.html?id=${menu.id}" class="btn btn--ghost btn--sm">수정</a>
+        <a href="/admin/menus/detail?id=${encodeURIComponent(menu.id)}" class="btn btn--ghost btn--sm">상세</a>
+        <a href="/admin/menus/edit?id=${encodeURIComponent(menu.id)}" class="btn btn--ghost btn--sm">수정</a>
         <button type="button" class="btn btn--danger btn--sm" data-delete-id="${menu.id}">삭제</button>
       </span>
     `;
