@@ -112,7 +112,7 @@
         <span class="badge ${order.status === "cancelled" ? "badge--danger" : ""}">
           ${escapeHtml(STATUS_LABELS[order.status] || order.status || "상태 없음")}
         </span>
-        <a class="btn btn--ghost btn--sm" href="detail.html?id=${encodeURIComponent(order.id)}">상세</a>
+        <a class="btn btn--ghost btn--sm" href="/admin/orders/detail?id=${encodeURIComponent(order.id)}">상세</a>
       </span>
     `;
     return row;

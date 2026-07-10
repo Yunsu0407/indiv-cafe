@@ -43,14 +43,14 @@
     return Object.entries(STATUS_LABELS)
       .map(
         ([status, label]) =>
-          `<option value="${status}" ${status === selectedStatus ? "selected" : ""}>${label}</option>`
+          `<option value="${status}" ${status === selectedStatus ? "selected" : ""}>${label}</option>`,
       )
       .join("");
   }
 
   function saveOrderStatus(orderId, status) {
     const nextOrders = window.CafeUtils.getOrders().map((order) =>
-      order.id === orderId ? { ...order, status } : order
+      order.id === orderId ? { ...order, status } : order,
     );
     window.CafeUtils.saveOrders(nextOrders);
   }
@@ -82,7 +82,7 @@
                 <span class="item-quantity">${Number(item.quantity) || 0}개</span>
                 <span class="item-subtotal">${window.CafeUtils.formatPrice(item.price * item.quantity)}</span>
               </li>
-            `
+            `,
           )
           .join("")}
       </ul>

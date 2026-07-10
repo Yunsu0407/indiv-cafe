@@ -75,7 +75,7 @@
             <div class="order-card__meta">
               <span>${getItemCount(order)}개 상품</span>
               <strong class="order-total">${window.CafeUtils.formatPrice(order.totalPrice)}</strong>
-              <a class="btn btn--ghost btn--sm" href="/admin/orders/detail.html?id=${encodeURIComponent(order.id)}">상세</a>
+              <a class="btn btn--ghost btn--sm" href="/admin/orders/detail?id=${encodeURIComponent(order.id)}">상세</a>
             </div>
           </article>
         `
