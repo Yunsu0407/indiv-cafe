@@ -130,18 +130,20 @@
       temperature: options.temperature || menu.options?.temperature?.[0] || "hot",
       size: options.size || menu.options?.sizes?.[0] || "regular",
     };
+    const itemPrice = menu.price + (normalizedOptions.size === "large" ? 500 : 0);
     const itemId = createCartItemId(menuId, normalizedOptions);
     const cart = getCart();
     const existingItem = cart.find((item) => item.id === itemId);
 
     if (existingItem) {
       existingItem.quantity += quantity;
+      existingItem.price = itemPrice;
     } else {
       cart.push({
         id: itemId,
         menuId,
         name: menu.name,
-        price: menu.price,
+        price: itemPrice,
         quantity,
         options: normalizedOptions,
       });

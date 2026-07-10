@@ -270,6 +270,7 @@
 }
 
 .menu-card {
+  height: 100%;
   overflow: hidden;
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
@@ -287,6 +288,7 @@
 
 .menu-card a {
   display: grid;
+  grid-template-rows: auto 1fr;
   height: 100%;
 }
 
@@ -307,7 +309,9 @@
 
 .menu-body {
   display: grid;
+  grid-template-rows: auto 4.5rem auto;
   gap: var(--space-3);
+  height: 100%;
   padding: var(--space-4);
 }
 
@@ -316,12 +320,25 @@
   align-items: start;
   justify-content: space-between;
   gap: var(--space-3);
+  min-height: 3.5rem;
+}
+
+.menu-title > div {
+  min-width: 0;
 }
 
 .menu-title h3 {
   margin: 0;
   font-size: var(--font-size-lg);
   letter-spacing: 0;
+}
+
+.menu-title h3,
+.menu-title p {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
 }
 
 .menu-title p,
@@ -331,13 +348,20 @@
 }
 
 .menu-description {
-  min-height: 3rem;
+  overflow: hidden;
+  display: -webkit-box;
+  min-height: 4.5rem;
+  line-height: 1.5;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
 }
 
 .tag-row {
   display: flex;
   flex-wrap: wrap;
   gap: var(--space-2);
+  align-self: end;
+  min-height: 1.75rem;
 }
 
 .tag.warning {
@@ -351,8 +375,10 @@
 }
 
 .price {
+  flex: 0 0 auto;
   font-size: var(--font-size-lg);
   font-weight: 900;
+  white-space: nowrap;
 }
 
 .empty-state {

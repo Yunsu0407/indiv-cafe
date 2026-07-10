@@ -85,6 +85,8 @@
 .page {
   position: relative;
   isolation: isolate;
+  display: grid;
+  align-items: start;
   padding-block: var(--space-6);
 }
 
@@ -225,9 +227,29 @@
 }
 
 .empty-state {
+  display: grid;
+  width: min(100%, 24rem);
+  min-height: 24rem;
+  align-content: center;
+  justify-self: center;
+  justify-items: center;
+  gap: var(--space-3);
+  margin: clamp(var(--space-5), 8vh, var(--space-7)) auto;
+  padding: var(--space-7);
   text-align: center;
+}
+
+.empty-state h2,
+.empty-state p {
+  margin: 0;
+}
+
+.empty-state h2 {
+  font-size: var(--font-size-xl);
+}
+
+.empty-state p {
   color: var(--color-text-muted);
-  padding: var(--space-7) 0;
 }
 
 .order-success {
@@ -254,6 +276,10 @@
   .top-nav {
     display: grid;
     grid-template-columns: 1fr;
+  }
+
+  .empty-state {
+    min-height: 20rem;
   }
 }
 

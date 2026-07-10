@@ -208,6 +208,26 @@
 .order-list {
   display: grid;
   gap: var(--space-4);
+  max-height: 60vh;
+  overflow-y: auto;
+  padding-right: var(--space-2);
+  overscroll-behavior: contain;
+  scrollbar-color: var(--color-primary) rgba(255, 255, 255, 0.56);
+  scrollbar-width: thin;
+}
+
+.order-list::-webkit-scrollbar {
+  width: 0.5rem;
+}
+
+.order-list::-webkit-scrollbar-track {
+  border-radius: var(--radius-pill);
+  background: rgba(255, 255, 255, 0.56);
+}
+
+.order-list::-webkit-scrollbar-thumb {
+  border-radius: var(--radius-pill);
+  background: var(--color-primary);
 }
 
 .order-card {
@@ -328,6 +348,10 @@
 
   .order-item {
     grid-template-columns: 1fr;
+  }
+
+  .order-list {
+    max-height: 52vh;
   }
 }
 

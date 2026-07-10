@@ -97,9 +97,11 @@
 .auth-card {
   display: grid;
   gap: var(--space-4);
-  width: min(100%, 44rem);
+  width: min(100%, 28rem);
+  min-height: 30rem;
   justify-items: stretch;
   padding: var(--space-7);
+  align-content: center;
 }
 
 .auth-heading {

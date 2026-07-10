@@ -19,7 +19,7 @@ window.addEventListener("DOMContentLoaded", () => {
       iced: "Iced",
       room: "Room",
       regular: "Regular",
-      large: "Large",
+      large: "Large (+500원)",
       single: "Single",
     };
 
@@ -55,7 +55,7 @@ window.addEventListener("DOMContentLoaded", () => {
       <div class="empty-state">
         메뉴를 찾을 수 없습니다.
         <div class="submit-row">
-          <a class="primary-button" href="./list.html">목록으로</a>
+          <a class="primary-button" href="../basket/list.html">장바구니 목록</a>
         </div>
       </div>
     `;
@@ -80,7 +80,7 @@ window.addEventListener("DOMContentLoaded", () => {
         ${menu.isRecommended ? '<span class="tag warning">추천</span>' : ""}
         ${menu.isSoldOut ? '<span class="tag danger">품절</span>' : ""}
       </div>
-      <strong class="detail-price">${CafeUtils.formatPrice(menu.price)}</strong>
+      <strong id="detailPrice" class="detail-price">${CafeUtils.formatPrice(menu.price)}</strong>
       ${
         menu.isSoldOut
           ? '<p class="sold-out-message">현재 품절된 메뉴입니다.</p>'
@@ -95,7 +95,7 @@ window.addEventListener("DOMContentLoaded", () => {
                 </label>
               </div>
               <div class="submit-row">
-                <a class="ghost-button" href="./list.html">목록</a>
+                <a class="ghost-button" href="../basket/list.html">장바구니 목록</a>
                 <button class="primary-button" type="submit">장바구니 담기</button>
               </div>
               <p id="feedback" class="feedback" aria-live="polite"></p>
@@ -110,6 +110,15 @@ window.addEventListener("DOMContentLoaded", () => {
   if (!optionForm) {
     return;
   }
+
+  function updateDetailPrice() {
+    const selectedSize = optionForm.querySelector('input[name="size"]:checked')?.value;
+    const optionPrice = selectedSize === "large" ? 500 : 0;
+    document.querySelector("#detailPrice").textContent = CafeUtils.formatPrice(menu.price + optionPrice);
+  }
+
+  optionForm.addEventListener("change", updateDetailPrice);
+  updateDetailPrice();
 
   optionForm.addEventListener("submit", (event) => {
     event.preventDefault();
